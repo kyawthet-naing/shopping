@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'widgets/product_card.dart';
 import '/data/api/product_api.dart';
-import 'package:flutter/material.dart';
 import '/pages/product/widgets/product_cart.dart';
 import 'package:shopping/data/models/product_model.dart';
 
@@ -13,8 +13,10 @@ class Product extends StatefulWidget {
   State<Product> createState() => _ProductState();
 }
 
+typedef TypeDef = List<ProductModel>;
+
 class _ProductState extends State<Product> {
-  List<ProductModel> products = [];
+  TypeDef products = [];
 
   @override
   void initState() {
