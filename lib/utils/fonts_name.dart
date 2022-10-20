@@ -1,3 +1,3 @@
 class FontName {
-  static String laila = "Laila";
+  static const String laila = "Laila";
 }

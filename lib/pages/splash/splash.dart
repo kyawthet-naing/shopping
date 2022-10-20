@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping/utils/images_name.dart';
 import '/pages/product/product.dart';
 
 class Splash extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'assets/images/shop.png',
+          ImagesName.shop,
           width: 150,
           height: 150,
         ),
