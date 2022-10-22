@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping/providers/cart_provider.dart';
+import 'package:shopping/providers/network_provider.dart';
 
 class ProviderWidget extends StatelessWidget {
   final Widget child;
@@ -10,7 +11,10 @@ class ProviderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => CartProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => NetworkProvider()),
+      ],
       child: child,
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping/utils/color_utils.dart';
 import 'package:shopping/utils/images_name.dart';
 import 'package:shopping/providers/cart_provider.dart';
 import 'package:shopping/pages/product/widgets/product_card.dart';
@@ -13,7 +12,6 @@ class Cart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorUtils.white,
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Cart'),
@@ -22,8 +20,8 @@ class Cart extends StatelessWidget {
         builder: (ctx, pd, child) => pd.cartCount == 0
             ? Center(
                 child: Image.asset(
-                  ImagesName.emptyCart,
-                  width: double.infinity,
+                  ImagesName.girlWithCart,
+                  width: 200,
                 ),
               )
             : SingleChildScrollView(

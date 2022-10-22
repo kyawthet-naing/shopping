@@ -27,7 +27,12 @@ class Routes {
     }
   }
 
-  static pageRouter({required RouteSettings settings, required Widget page}) {
-    return MaterialPageRoute(builder: (ctx) => page, settings: settings);
+  static pageRouter({required Widget page, required RouteSettings settings}) {
+    return MaterialPageRoute(
+      builder: (ctx) => NetworkListener(
+        child: PopupListener(child: page),
+      ),
+      settings: settings,
+    );
   }
 }

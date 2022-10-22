@@ -4,5 +4,7 @@ class ColorUtils {
   static Color blackPoint2 = Colors.black.withOpacity(.2);
   static Color white = Colors.white;
   static Color red = Colors.redAccent;
-  static Color appBarColor = const Color.fromRGBO(55, 71, 79, 1);
+  static Color primary = const Color(0xFF581845);
+  static Color black = const Color(0xFF363740);
+  static Color background = const Color(0xffe9f5f9);
 }

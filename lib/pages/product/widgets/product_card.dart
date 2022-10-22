@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping/components/image_view.dart';
+import 'package:shopping/components/popup_listener.dart';
+import 'package:shopping/components/popup_view.dart';
 import 'package:shopping/data/models/product_model.dart';
 import 'package:shopping/pages/product/product_detail.dart';
 import 'package:shopping/pages/product/widgets/add_to_cart_button.dart';
@@ -38,8 +41,8 @@ class ProductCard extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: ColorUtils.blackPoint2,
-                    spreadRadius: 3,
-                    blurRadius: 3,
+                    spreadRadius: 2,
+                    blurRadius: 2,
                     offset: const Offset(0, 0), // changes position of shadow
                   ),
                 ],
@@ -47,8 +50,8 @@ class ProductCard extends StatelessWidget {
               child: Row(
                 children: [
                   const SizedBox(width: 10),
-                  Image.network(
-                    product.image!,
+                  ImageView(
+                    image: product.image!,
                     width: 116,
                     fit: BoxFit.fill,
                     height: double.infinity,
@@ -73,16 +76,12 @@ class ProductCard extends StatelessWidget {
                           style: const TextStyle(fontSize: 14),
                         ),
                         const Spacer(),
-                        if (!pd.alreadyExit(product.id!))
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: AddToCartButton(product: product),
-                          )
-                        else
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: QtyButton(product: product),
-                          )
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: !pd.alreadyExit(product.id!)
+                              ? AddToCartButton(product: product)
+                              : QtyButton(product: product),
+                        )
                       ],
                     ),
                   ),
@@ -93,7 +92,17 @@ class ProductCard extends StatelessWidget {
             ///delete icon
             if (isCart)
               GestureDetector(
-                onTap: () => pd.removeProduct(product.id),
+                onTap: () {
+                  PopupListenerState.show(
+                    child: PopupView(
+                      title:
+                          "Are you sure that you want to remove this item ? If not, click \"Cancel\".",
+                      confirm: () {
+                        pd.removeProduct(product.id);
+                      },
+                    ),
+                  );
+                },
                 child: Container(
                   width: 40,
                   height: 40,

@@ -45,7 +45,7 @@ extension on QtyButton {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      color: ColorUtils.appBarColor,
+      color: ColorUtils.primary,
       onPressed: () => onTap(),
       child: Icon(icon, color: ColorUtils.white),
     );
