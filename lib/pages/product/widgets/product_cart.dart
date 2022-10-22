@@ -10,16 +10,16 @@ class ProductCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CartProvider>(
-      builder: (ctx, pd, child) => GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, Cart.route);
-        },
-        child: Padding(
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, Cart.route);
+      },
+      child: Consumer<CartProvider>(
+        builder: (ctx, pd, child) => Padding(
           padding: const EdgeInsets.only(top: 10.0, right: 20.0),
           child: Badge(
             showBadge: pd.cartCount != 0,
-            badgeColor: ColorUtils.appBarColor,
+            badgeColor: ColorUtils.primary,
             animationDuration: const Duration(milliseconds: 200),
             animationType: BadgeAnimationType.scale,
             badgeContent: Text(

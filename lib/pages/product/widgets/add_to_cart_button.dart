@@ -19,7 +19,7 @@ class AddToCartButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        color: ColorUtils.appBarColor,
+      color: ColorUtils.primary,
         onPressed: () {
           pd.addNewProduct(
             CartModel(qty: 1, product: product),
