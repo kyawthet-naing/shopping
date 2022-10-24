@@ -34,9 +34,11 @@ dependencies:
   connectivity_plus: ^3.0.2
 
   cached_network_image: ^3.2.2
+  dotted_dashed_line: ^0.0.3
   cupertino_icons: ^1.0.2
   provider: ^6.0.4
   badges: ^2.0.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

@@ -6,6 +6,26 @@ class CartProvider extends ChangeNotifier {
 
   int get cartCount => cart.length;
 
+  int get totalQty => totalItemQty();
+
+  int totalItemQty() {
+    int total = 0;
+    for (var item in cart) {
+      total += item.qty;
+    }
+    return total;
+  }
+
+  String get subTotal => totalPrice();
+
+  String totalPrice() {
+    num total = 0;
+    for (var item in cart) {
+      total += item.qty * item.product.price!;
+    }
+    return total.toStringAsFixed(2);
+  }
+
   addNewProduct(CartModel cart) {
     this.cart.add(cart);
     notifyListeners();
