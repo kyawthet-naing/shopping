@@ -3,8 +3,8 @@ import 'dart:async';
 enum PopupStatus { show, hide }
 
 class PopupState {
-  PopupStatus overlayStatus;
-  PopupState({required this.overlayStatus});
+  PopupStatus popupStatus;
+  PopupState({required this.popupStatus});
 }
 
 class PopupBloc {

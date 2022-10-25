@@ -44,14 +44,14 @@ class PopupListenerState extends State<PopupListener>
   static void show({required Widget child}) {
     childWidget = child;
     popupBloc.popupController.sink.add(
-      PopupState(overlayStatus: PopupStatus.show),
+      PopupState(popupStatus: PopupStatus.show),
     );
     _controller.forward();
   }
 
   static void hide() {
     popupBloc.popupController.sink.add(
-      PopupState(overlayStatus: PopupStatus.hide),
+      PopupState(popupStatus: PopupStatus.hide),
     );
     _controller.reset();
   }
@@ -72,11 +72,11 @@ class PopupListenerState extends State<PopupListener>
         widget.child,
         StreamBuilder<PopupState>(
           stream: popupBloc.popupStream(),
-          initialData: PopupState(overlayStatus: PopupStatus.hide),
+          initialData: PopupState(popupStatus: PopupStatus.hide),
           builder: (ctx, snapshot) {
             if (snapshot.hasData) {
               PopupState state = snapshot.data!;
-              return state.overlayStatus == PopupStatus.show
+              return state.popupStatus == PopupStatus.show
                   ? Container(
                       width: double.infinity,
                       height: double.infinity,
