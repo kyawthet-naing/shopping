@@ -20,8 +20,9 @@ class Shoppy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderWidget(
-      child: Consumer<AppTheme>(
-        builder: (ctx, pd, child) => MaterialApp(
+      child: Consumer<AppTheme>(builder: (ctx, pd, child) {
+        pd.getPreviousTheme();
+        return MaterialApp(
           title: "Shopping",
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
@@ -35,8 +36,8 @@ class Shoppy extends StatelessWidget {
             ),
           ),
           onGenerateRoute: Routes.onGenerateRoute,
-        ),
-      ),
+        );
+      }),
     );
   }
 }

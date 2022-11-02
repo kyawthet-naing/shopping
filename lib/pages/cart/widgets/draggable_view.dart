@@ -121,7 +121,7 @@ class DraggableView extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color:theme.primary,
+                  color: theme.primary,
                 ),
                 child: Column(
                   children: [
@@ -232,7 +232,7 @@ class DraggableView extends StatelessWidget {
               BounceMe(
                 child: AppButton(
                   onTap: () {},
-                  color:theme.primary,
+                  color: theme.primary,
                   height: 50,
                   borderRadius: BorderRadius.circular(10),
                   width: double.infinity,
