@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shopping/utils/color_utils.dart';
+import 'package:shopping/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class ImageView extends StatelessWidget {
@@ -47,7 +47,7 @@ class ImageView extends StatelessWidget {
             color: Colors.white,
             alignment: Alignment.center,
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(ColorUtils.primary),
+              valueColor: AlwaysStoppedAnimation(AppTheme().primary),
             ),
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:shopping/data/models/product_model.dart';
 import 'package:shopping/providers/cart_provider.dart';
-import 'package:shopping/utils/color_utils.dart';
+import 'package:shopping/theme/theme_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -38,16 +38,18 @@ class QtyButton extends StatelessWidget {
 
 extension on QtyButton {
   Widget button({required IconData icon, required Function onTap}) {
-    return MaterialButton(
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      height: 40,
-      minWidth: 40,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+    return ThemeWidget(
+      builder: (_, theme, __) => MaterialButton(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        height: 40,
+        minWidth: 40,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        color: theme.primary,
+        onPressed: () => onTap(),
+        child: Icon(icon, color: theme.white),
       ),
-      color: ColorUtils.primary,
-      onPressed: () => onTap(),
-      child: Icon(icon, color: ColorUtils.white),
     );
   }
 }

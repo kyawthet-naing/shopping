@@ -1,3 +1,5 @@
+import 'package:shopping/pages/settings/setting.dart';
+
 import 'route_import.dart';
 
 class Routes {
@@ -11,6 +13,10 @@ class Routes {
 
       case Cart.route:
         return pageRouter(settings: settings, page: const Cart());
+
+
+      case Setting.route:
+        return pageRouter(settings: settings, page: const Setting());
 
       case ProductDetail.route:
         var product = settings.arguments as ProductModel;

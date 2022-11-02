@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping/utils/color_utils.dart';
+import 'package:shopping/theme/theme.dart';
 
 class AppButton extends StatelessWidget {
   final double? width;
@@ -30,9 +30,9 @@ class AppButton extends StatelessWidget {
       child: Material(
         borderRadius: borderRadius,
         clipBehavior: Clip.antiAlias,
-        color: color ?? ColorUtils.white,
+        color: color ?? AppTheme().white,
         child: InkWell(
-          hoverColor: hoveColor ?? ColorUtils.primary.withOpacity(.1),
+          hoverColor: hoveColor ?? AppTheme().primary.withOpacity(.1),
           onTap: () => onTap(),
           child: Container(
               width: width ?? 50,

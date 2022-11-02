@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping/utils/color_utils.dart';
+import 'package:shopping/theme/theme.dart';
 
 enum SolidDividerAxis { horizontal, vertical }
 
@@ -22,12 +22,12 @@ class SolidDivider extends StatelessWidget {
         ? Container(
             width: width,
             height: strokeWidth,
-            color: color ?? ColorUtils.black,
+            color: color ?? AppTheme().black,
           )
         : Container(
             width: strokeWidth,
             height: width,
-            color: color ?? ColorUtils.black,
+            color: color ?? AppTheme().black,
           );
   }
 }

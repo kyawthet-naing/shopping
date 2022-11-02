@@ -1,4 +1,4 @@
-import 'package:shopping/utils/color_utils.dart';
+import 'package:shopping/theme/theme.dart';
 import 'package:flutter/material.dart';
 import '../bloc/popup_bloc.dart';
 
@@ -80,7 +80,7 @@ class PopupListenerState extends State<PopupListener>
                   ? Container(
                       width: double.infinity,
                       height: double.infinity,
-                      color: ColorUtils.blackPoint2,
+                      color: AppTheme().blackPoint2,
                       alignment: Alignment.center,
                       child: ScaleTransition(
                         scale: _animation,

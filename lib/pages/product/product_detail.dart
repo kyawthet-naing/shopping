@@ -4,7 +4,7 @@ import 'widgets/qty_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'widgets/add_to_cart_button.dart';
-import 'package:shopping/utils/color_utils.dart';
+import 'package:shopping/theme/theme.dart';
 import 'package:shopping/providers/cart_provider.dart';
 import 'package:shopping/data/models/product_model.dart';
 import 'package:shopping/pages/product/widgets/product_cart.dart';
@@ -23,7 +23,7 @@ Nulla Lorem laboris mollit dolor. Consectetur dolore sit nostrud do dolore in au
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorUtils.white,
+      backgroundColor: AppTheme().white,
       appBar: AppBar(
         title: Text(
           product.title ?? '',
@@ -39,7 +39,7 @@ Nulla Lorem laboris mollit dolor. Consectetur dolore sit nostrud do dolore in au
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ImageView(
-                image:product.image!,
+                image: product.image!,
                 width: double.infinity,
                 height: MediaQuery.of(context).size.width - 20,
               ),

@@ -8,7 +8,7 @@ import 'package:shopping/pages/product/product_detail.dart';
 import 'package:shopping/pages/product/widgets/add_to_cart_button.dart';
 import 'package:shopping/pages/product/widgets/qty_button.dart';
 import 'package:shopping/providers/cart_provider.dart';
-import 'package:shopping/utils/color_utils.dart';
+import 'package:shopping/theme/theme.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
@@ -40,7 +40,7 @@ class ProductCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorUtils.blackPoint2,
+                    color: AppTheme().blackPoint2,
                     spreadRadius: 2,
                     blurRadius: 2,
                     offset: const Offset(0, 0), // changes position of shadow
@@ -107,7 +107,7 @@ class ProductCard extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: ColorUtils.red,
+                    color: AppTheme().red,
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
@@ -115,7 +115,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.delete,
-                    color: ColorUtils.white,
+                    color: AppTheme().white,
                   ),
                 ),
               )

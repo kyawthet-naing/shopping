@@ -33,7 +33,10 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   connectivity_plus: ^3.0.2
 
+  animated_size_and_fade: ^3.0.0
   cached_network_image: ^3.2.2
+  shared_preferences: ^2.0.15
+  flutter_colorpicker: ^1.0.3
   dotted_dashed_line: ^0.0.3
   cupertino_icons: ^1.0.2
   provider: ^6.0.4

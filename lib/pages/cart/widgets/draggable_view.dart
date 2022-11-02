@@ -6,8 +6,9 @@ import 'package:shopping/components/app_button.dart';
 import 'package:shopping/components/solid_divider.dart';
 import 'package:shopping/data/models/cart_model.dart';
 import 'package:shopping/providers/cart_provider.dart';
-import 'package:shopping/utils/color_utils.dart';
+import 'package:shopping/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:shopping/theme/theme_widget.dart';
 import 'package:shopping/utils/reusable.dart';
 
 class DraggableView extends StatelessWidget {
@@ -34,7 +35,7 @@ class DraggableView extends StatelessWidget {
                 BoxShadow(
                   blurRadius: 7,
                   spreadRadius: 3,
-                  color: ColorUtils.blackPoint2,
+                  color: AppTheme().blackPoint2,
                   offset: const Offset(0, -1), // Shadow position
                 ),
               ],
@@ -69,7 +70,7 @@ class DraggableView extends StatelessWidget {
   Widget dottedLine({Color? color}) {
     return DottedDashedLine(
       height: 0,
-      dashColor: color ?? ColorUtils.black,
+      dashColor: color ?? AppTheme().black,
       width: double.infinity,
       axis: Axis.horizontal,
     );
@@ -85,7 +86,7 @@ class DraggableView extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
-                color: ColorUtils.blackPoint2,
+                color: AppTheme().blackPoint2,
                 borderRadius: BorderRadius.circular(2),
               ),
               width: 40,
@@ -98,7 +99,7 @@ class DraggableView extends StatelessWidget {
                 'Cart Detail',
                 style: TextStyle(
                   fontSize: 16,
-                  color: ColorUtils.black,
+                  color: AppTheme().black,
                 ),
               ),
             ),
@@ -110,140 +111,144 @@ class DraggableView extends StatelessWidget {
   }
 
   Widget totalView() {
-    return Consumer<CartProvider>(
-      builder: (ctx, pd, child) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorUtils.primary,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                          child: Column(
-                        children: [
-                          Container(
-                            height: 39.5,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Items :',
-                                  style: TextStyle(
-                                    color: ColorUtils.white,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const Spacer(),
-                                Text(
-                                  '${pd.cartCount}',
-                                  style: TextStyle(
-                                    color: ColorUtils.white,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          dottedLine(color: ColorUtils.white),
-                          Container(
-                            height: 39.5,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Qty :',
-                                  style: TextStyle(
-                                    color: ColorUtils.white,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const Spacer(),
-                                Text(
-                                  '${pd.totalQty}',
-                                  style: TextStyle(
-                                    color: ColorUtils.white,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )),
-                      SizedBox(
-                        width: 1,
-                        height: 80,
-                        child: SolidDivider(
-                          color: ColorUtils.white,
-                          axis: SolidDividerAxis.vertical,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          alignment: Alignment.center,
-                          height: 80,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Subtotal :',
-                                  style: TextStyle(
-                                      color: ColorUtils.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  '${Reusable.priceFormat(num.parse(pd.subTotal))} \$',
-                                  style: TextStyle(
-                                    color: ColorUtils.white,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 5),
-            BounceMe(
-              child: AppButton(
-                onTap: () {},
-                color: ColorUtils.primary,
-                height: 50,
-                borderRadius: BorderRadius.circular(10),
+    return ThemeWidget(
+      builder: (ctx, theme, __) => Consumer<CartProvider>(
+        builder: (ctx, pd, child) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              Container(
                 width: double.infinity,
-                child: Text(
-                  "place order".toUpperCase(),
-                  style: TextStyle(
-                    color: ColorUtils.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color:theme.primary,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Container(
+                              height: 39.5,
+                              alignment: Alignment.center,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Items :',
+                                    style: TextStyle(
+                                      color: AppTheme().white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    '${pd.cartCount}',
+                                    style: TextStyle(
+                                      color: AppTheme().white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            dottedLine(color: theme.white),
+                            Container(
+                              height: 39.5,
+                              alignment: Alignment.center,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Qty :',
+                                    style: TextStyle(
+                                      color: AppTheme().white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    '${pd.totalQty}',
+                                    style: TextStyle(
+                                      color: AppTheme().white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )),
+                        SizedBox(
+                          width: 1,
+                          height: 80,
+                          child: SolidDivider(
+                            color: theme.white,
+                            axis: SolidDividerAxis.vertical,
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            alignment: Alignment.center,
+                            height: 80,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'Subtotal :',
+                                    style: TextStyle(
+                                        color: AppTheme().white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    '${Reusable.priceFormat(num.parse(pd.subTotal))} \$',
+                                    style: TextStyle(
+                                      color: AppTheme().white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 5),
+              BounceMe(
+                child: AppButton(
+                  onTap: () {},
+                  color:theme.primary,
+                  height: 50,
+                  borderRadius: BorderRadius.circular(10),
+                  width: double.infinity,
+                  child: Text(
+                    "place order".toUpperCase(),
+                    style: TextStyle(
+                      color: AppTheme().white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 15),
-          ],
+              const SizedBox(height: 15),
+            ],
+          ),
         ),
       ),
     );
