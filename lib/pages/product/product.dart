@@ -153,6 +153,11 @@ class _ProductState extends State<Product> with SingleTickerProviderStateMixin {
                                   searchController.clear();
                                   searchResult.clear();
                                 },
+                                onChanged: (value) {
+                                  if (value.trim().isEmpty) {
+                                    searchResult.clear();
+                                  }
+                                },
                                 onSearch: searchProduct,
                               ),
                             );

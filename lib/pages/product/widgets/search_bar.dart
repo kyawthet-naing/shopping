@@ -5,9 +5,13 @@ import 'package:shopping/theme/theme_widget.dart';
 class SearchBar extends StatelessWidget {
   final TextEditingController controller;
   final Function(String) onSearch;
+  final Function(String) onChanged;
   final Function onClear;
   const SearchBar(this.controller,
-      {super.key, required this.onSearch, required this.onClear});
+      {super.key,
+      required this.onSearch,
+      required this.onChanged,
+      required this.onClear});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +40,7 @@ class SearchBar extends StatelessWidget {
                 child: TextField(
                   textInputAction: TextInputAction.search,
                   onSubmitted: onSearch,
+                  onChanged: onChanged,
                   controller: controller,
                   decoration: InputDecoration(
                     hintText: "search".tr(),
