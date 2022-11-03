@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: ^2.0.15
   flutter_colorpicker: ^1.0.3
   dotted_dashed_line: ^0.0.3
+  easy_localization: ^3.0.1
   cupertino_icons: ^1.0.2
   provider: ^6.0.4
   badges: ^2.0.3
@@ -68,6 +69,7 @@ flutter:
   assets:
     - assets/json/
     - assets/images/
+    - assets/translations/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

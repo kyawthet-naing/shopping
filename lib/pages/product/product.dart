@@ -1,7 +1,11 @@
 import 'package:animated_size_and_fade/animated_size_and_fade.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:shopping/bloc/search_bloc.dart';
 import 'package:shopping/data/models/product_model.dart';
+import 'package:shopping/pages/product/widgets/search_bar.dart';
 import 'package:shopping/pages/settings/setting.dart';
 import 'package:shopping/theme/theme_widget.dart';
+import 'package:shopping/utils/reusable.dart';
 import '/pages/product/widgets/product_cart.dart';
 import 'package:shopping/theme/theme.dart';
 import 'package:flutter/rendering.dart';
@@ -24,15 +28,16 @@ class _ProductState extends State<Product> with SingleTickerProviderStateMixin {
   TypeDef products = [];
   TypeDef searchResult = [];
   bool showSearchBar = true;
-  late ScrollController _scrollViewController;
+  late ScrollController _scrollCtrl;
+  final SearchBloc _searchBloc = SearchBloc();
   final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
-    _scrollViewController = ScrollController();
+    _scrollCtrl = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getData();
-      _scrollViewController.addListener(listener);
+      _scrollCtrl.addListener(listener);
     });
     super.initState();
   }
@@ -42,77 +47,123 @@ class _ProductState extends State<Product> with SingleTickerProviderStateMixin {
     setState(() => this.products = products);
   }
 
+/*
+  scrollStartStopListener() {
+    _scrollCtrl.position.isScrollingNotifier.addListener(() {
+      if (!_scrollCtrl.position.isScrollingNotifier.value) {
+        print('scroll is stopped');
+      } else {
+        print('scroll is started');
+      }
+    });
+  }
+*/
   listener() {
-    var userAction = _scrollViewController.position.userScrollDirection;
+    var userAction = _scrollCtrl.position.userScrollDirection;
 
     ///reverse  is scroll down
     if (userAction == ScrollDirection.reverse) {
       ///print('reverse ');
-      showSearchBar = false;
+      _searchBloc.searchController.sink.add(false);
     }
 
     ///reverse  is scroll up
     if (userAction == ScrollDirection.forward) {
       ///print('forward ');
-      showSearchBar = true;
+      _searchBloc.searchController.sink.add(true);
     }
-    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _searchBloc.disposed();
+    _scrollCtrl.removeListener(listener);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ThemeWidget(
         builder: (_, theme, __) => Scaffold(
-              appBar: AppBar(
-                elevation: 0,
-                centerTitle: true,
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.settings,
-                    color: theme.white,
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, Setting.route);
-                  },
-                ),
-                title: const Text("Product"),
-                actions: const [ProductCart()],
-              ),
               body: Column(
                 children: [
-                  AnimatedSizeAndFade.showHide(
-                    show: showSearchBar,
-                    fadeDuration: const Duration(milliseconds: 200),
-                    sizeDuration: const Duration(milliseconds: 200),
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      height: 60,
+                  Container(
+                    decoration: BoxDecoration(
                       color: theme.primary,
-                      width: double.infinity,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: AppTheme().white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: theme.primary.withOpacity(.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
-                        child: TextFormField(
-                          controller: searchController,
-                          onChanged: searchProduct,
-                          decoration: const InputDecoration(
-                            hintText: "Search",
-                            contentPadding: EdgeInsets.all(6),
-                            border: InputBorder.none,
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                            top: Reusable.statusBarHeight,
+                          ),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: theme.primary,
+                          ),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.settings,
+                                  color: theme.white,
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    Setting.route,
+                                  );
+                                },
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'product'.tr(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: theme.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              const ProductCart()
+                            ],
                           ),
                         ),
-                      ),
+                        StreamBuilder<bool>(
+                          stream: _searchBloc.stream,
+                          initialData: true,
+                          builder: (ctx, snapshot) {
+                            return AnimatedSizeAndFade.showHide(
+                              show: snapshot.data!,
+                              fadeDuration: const Duration(milliseconds: 200),
+                              sizeDuration: const Duration(milliseconds: 200),
+                              child: SearchBar(
+                                searchController,
+                                onClear: () {
+                                  searchController.clear();
+                                  searchResult.clear();
+                                },
+                                onSearch: searchProduct,
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                   Expanded(
                     child: SingleChildScrollView(
-                      controller: _scrollViewController,
+                      controller: _scrollCtrl,
                       physics: const BouncingScrollPhysics(),
                       padding:
                           const EdgeInsets.only(top: 10, left: 10, right: 10),

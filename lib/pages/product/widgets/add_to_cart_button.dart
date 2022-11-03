@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping/data/models/cart_model.dart';
@@ -27,8 +28,8 @@ class AddToCartButton extends StatelessWidget {
             );
           },
           child: Text(
-            'Add to cart',
-            style: TextStyle(color:theme.white, fontSize: 16),
+            'add_to_cart'.tr(),
+            style: TextStyle(color: theme.white, fontSize: 16),
           ),
         ),
       ),

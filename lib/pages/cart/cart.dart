@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -62,7 +63,7 @@ class _CartState extends State<Cart> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Cart'),
+        title: Text('cart'.tr()),
       ),
       body: Consumer<CartProvider>(
         builder: (ctx, pd, child) => pd.cartCount == 0

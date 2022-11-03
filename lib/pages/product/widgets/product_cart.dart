@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping/pages/cart/cart.dart';
 import 'package:shopping/providers/cart_provider.dart';
-import 'package:shopping/theme/theme.dart';
 import 'package:shopping/theme/theme_widget.dart';
 
 class ProductCart extends StatelessWidget {
@@ -30,7 +29,10 @@ class ProductCart extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              child: const Icon(Icons.shopping_cart),
+              child: Icon(
+                Icons.shopping_cart,
+                color: theme.white,
+              ),
             ),
           ),
         ),

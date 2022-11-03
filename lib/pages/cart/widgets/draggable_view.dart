@@ -17,94 +17,100 @@ class DraggableView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(
-      builder: (ctx, pd, child) => DraggableScrollableSheet(
-        initialChildSize: 0.6,
-        minChildSize: 0.5,
-        maxChildSize: 1,
-        builder: (ctx, controller) {
-          return Container(
-            margin: const EdgeInsets.only(
-              left: 10,
-              right: 10,
-              top: 120,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 7,
-                  spreadRadius: 3,
-                  color: AppTheme().blackPoint2,
-                  offset: const Offset(0, -1), // Shadow position
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: RemoveScrollWave(
-                    child: SingleChildScrollView(
-                      controller: controller,
-                      child: Column(
-                        children: [
-                          header,
-                          ...List.generate(
-                            pd.cartCount,
-                            (idx) => cartDetailItem(pd.cart[idx]),
-                          ),
-                        ],
+      builder: (ctx, pd, child) => ThemeWidget(
+        builder: (_, theme, __) => DraggableScrollableSheet(
+          initialChildSize: 0.6,
+          minChildSize: 0.5,
+          maxChildSize: 1,
+          builder: (ctx, controller) {
+            return Container(
+              margin: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 120,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 7,
+                    spreadRadius: 3,
+                    color: theme.blackPoint2,
+                    offset: const Offset(0, -1), // Shadow position
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: RemoveScrollWave(
+                      child: SingleChildScrollView(
+                        controller: controller,
+                        child: Column(
+                          children: [
+                            header,
+                            ...List.generate(
+                              pd.cartCount,
+                              (idx) => cartDetailItem(pd.cart[idx]),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                totalView()
-              ],
-            ),
-          );
-        },
+                  totalView()
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 
   Widget dottedLine({Color? color}) {
-    return DottedDashedLine(
-      height: 0,
-      dashColor: color ?? AppTheme().black,
-      width: double.infinity,
-      axis: Axis.horizontal,
+    return ThemeWidget(
+      builder: (_, theme, __) => DottedDashedLine(
+        height: 0,
+        dashColor: color ?? theme.black,
+        width: double.infinity,
+        axis: Axis.horizontal,
+      ),
     );
   }
 
   Widget get header {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Align(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 5),
-              decoration: BoxDecoration(
-                color: AppTheme().blackPoint2,
-                borderRadius: BorderRadius.circular(2),
+    return ThemeWidget(
+      builder: (_, theme, __) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 5),
+                decoration: BoxDecoration(
+                  color: theme.blackPoint2,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                width: 40,
+                height: 4,
               ),
-              width: 40,
-              height: 4,
-            ),
-            Container(
-              height: 40,
-              alignment: Alignment.center,
-              child: Text(
-                'Cart Detail',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppTheme().black,
+              Container(
+                height: 40,
+                alignment: Alignment.center,
+                child: Text(
+                  'Cart Detail',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: theme.black,
+                  ),
                 ),
               ),
-            ),
-            const SolidDivider(),
-          ],
+              const SolidDivider(),
+            ],
+          ),
         ),
       ),
     );
@@ -140,7 +146,7 @@ class DraggableView extends StatelessWidget {
                                   Text(
                                     'Items :',
                                     style: TextStyle(
-                                      color: AppTheme().white,
+                                      color: theme.white,
                                       fontSize: 14,
                                     ),
                                   ),
@@ -148,7 +154,7 @@ class DraggableView extends StatelessWidget {
                                   Text(
                                     '${pd.cartCount}',
                                     style: TextStyle(
-                                      color: AppTheme().white,
+                                      color: theme.white,
                                       fontSize: 14,
                                     ),
                                   ),
@@ -166,7 +172,7 @@ class DraggableView extends StatelessWidget {
                                   Text(
                                     'Qty :',
                                     style: TextStyle(
-                                      color: AppTheme().white,
+                                      color: theme.white,
                                       fontSize: 14,
                                     ),
                                   ),
@@ -174,7 +180,7 @@ class DraggableView extends StatelessWidget {
                                   Text(
                                     '${pd.totalQty}',
                                     style: TextStyle(
-                                      color: AppTheme().white,
+                                      color: theme.white,
                                       fontSize: 14,
                                     ),
                                   ),
@@ -204,7 +210,7 @@ class DraggableView extends StatelessWidget {
                                   child: Text(
                                     'Subtotal :',
                                     style: TextStyle(
-                                        color: AppTheme().white,
+                                        color: theme.white,
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -214,7 +220,7 @@ class DraggableView extends StatelessWidget {
                                   child: Text(
                                     '${Reusable.priceFormat(num.parse(pd.subTotal))} \$',
                                     style: TextStyle(
-                                      color: AppTheme().white,
+                                      color: theme.white,
                                       fontSize: 14,
                                     ),
                                   ),
@@ -239,7 +245,7 @@ class DraggableView extends StatelessWidget {
                   child: Text(
                     "place order".toUpperCase(),
                     style: TextStyle(
-                      color: AppTheme().white,
+                      color: theme.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),

@@ -10,7 +10,7 @@ class PopupState {
 class PopupBloc {
   StreamController<PopupState> popupController = StreamController.broadcast();
 
-  Stream<PopupState> popupStream() => popupController.stream;
+  Stream<PopupState> get popupStream => popupController.stream;
 
   disposed() => popupController.close();
 }

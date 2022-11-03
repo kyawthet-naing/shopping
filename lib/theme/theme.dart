@@ -11,6 +11,7 @@ class AppTheme extends ChangeNotifier {
   Color background = const Color(0xffe9f5f9);
   final String _themeKEY = "THEMEKEY";
 
+  ///get previous theme
   getPreviousTheme() {
     SharedPref.getData(key: _themeKEY).then(
       (color) {
@@ -24,6 +25,8 @@ class AppTheme extends ChangeNotifier {
   changeTheme(Color color) {
     primary = color;
     notifyListeners();
+
+    ///save theme
     SharedPref.setData(key: _themeKEY, value: color.toHex());
   }
 }

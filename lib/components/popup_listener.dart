@@ -71,7 +71,7 @@ class PopupListenerState extends State<PopupListener>
       children: [
         widget.child,
         StreamBuilder<PopupState>(
-          stream: popupBloc.popupStream(),
+          stream: popupBloc.popupStream,
           initialData: PopupState(popupStatus: PopupStatus.hide),
           builder: (ctx, snapshot) {
             if (snapshot.hasData) {
